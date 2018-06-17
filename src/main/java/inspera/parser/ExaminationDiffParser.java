@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import inspera.parser.domain.Examination;
 import inspera.parser.domain.Metadata;
 import inspera.parser.domain.diff.CandidateDifference;
+import inspera.parser.domain.diff.ExaminationDifference;
 import inspera.parser.domain.diff.MetaDiff;
 import inspera.parser.handler.CandidateDiffHandler;
 import inspera.parser.handler.MetaDiffHandler;
@@ -28,6 +29,7 @@ public class ExaminationDiffParser implements DiffParser {
     public ExaminationDiffParser() {
         objectMapper = ExamDiffObjectMapper.getObjectMapper();
         metaDiffHandler = new MetaDiffHandler(Metadata.class);
+        candidateDiffHandler = new CandidateDiffHandler();
     }
 
     @Override
@@ -42,8 +44,10 @@ public class ExaminationDiffParser implements DiffParser {
 
         CandidateDifference candidateDifference = candidateDiffHandler.getCandidateDifferences(beforeExaminationObj, afterExaminationObj);
 
+        ExaminationDifference examinationDifference = new ExaminationDifference(metaDiffList, candidateDifference);
+
         try {
-            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(metaDiffList));
+            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(examinationDifference));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
