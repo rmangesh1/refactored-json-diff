@@ -40,18 +40,24 @@ public class ExaminationDiffParser implements DiffParser {
 
         Examination afterExaminationObj = objectMapper.convertValue(after, Examination.class);
 
-        List<MetaDiff> metaDiffList = metaDiffHandler.getMetaDifferences(beforeExaminationObj, afterExaminationObj);
+        ExaminationDifference examinationDifference = null;
 
-        CandidateDifference candidateDifference = candidateDiffHandler.getCandidateDifferences(beforeExaminationObj, afterExaminationObj);
+        if(beforeExaminationObj.getId().equals(afterExaminationObj.getId())) {
+            List<MetaDiff> metaDiffList = metaDiffHandler.getMetaDifferences(beforeExaminationObj.getMeta(), afterExaminationObj.getMeta());
 
-        ExaminationDifference examinationDifference = new ExaminationDifference(metaDiffList, candidateDifference);
+            CandidateDifference candidateDifference = candidateDiffHandler.getCandidateDifferences(beforeExaminationObj, afterExaminationObj);
 
-        try {
-            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(examinationDifference));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            examinationDifference = new ExaminationDifference(metaDiffList, candidateDifference);
+
+            try {
+                System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(examinationDifference));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new RuntimeException("Not comparing the same examinations!");
         }
 
-        return null;
+        return objectMapper.valueToTree(examinationDifference);
     }
 }

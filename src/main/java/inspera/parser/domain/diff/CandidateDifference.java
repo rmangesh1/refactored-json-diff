@@ -8,34 +8,43 @@ import java.util.Objects;
  */
 public class CandidateDifference {
 
-    private List<CandidateIdentifier> editedCandidates;
+    private List<CandidateIdentifier> edited;
 
-    private List<CandidateIdentifier> addedCandidates;
+    private List<CandidateIdentifier> added;
 
-    private List<CandidateIdentifier> removedCandidates;
+    private List<CandidateIdentifier> removed;
 
-    public List<CandidateIdentifier> getEditedCandidates() {
-        return editedCandidates;
+    public CandidateDifference() {
     }
 
-    public void setEditedCandidates(List<CandidateIdentifier> editedCandidates) {
-        this.editedCandidates = editedCandidates;
+    public CandidateDifference(List<CandidateIdentifier> edited, List<CandidateIdentifier> added, List<CandidateIdentifier> removed) {
+        this.edited = edited;
+        this.added = added;
+        this.removed = removed;
     }
 
-    public List<CandidateIdentifier> getAddedCandidates() {
-        return addedCandidates;
+    public List<CandidateIdentifier> getEdited() {
+        return edited;
     }
 
-    public void setAddedCandidates(List<CandidateIdentifier> addedCandidates) {
-        this.addedCandidates = addedCandidates;
+    public void setEdited(List<CandidateIdentifier> edited) {
+        this.edited = edited;
     }
 
-    public List<CandidateIdentifier> getRemovedCandidates() {
-        return removedCandidates;
+    public List<CandidateIdentifier> getAdded() {
+        return added;
     }
 
-    public void setRemovedCandidates(List<CandidateIdentifier> removedCandidates) {
-        this.removedCandidates = removedCandidates;
+    public void setAdded(List<CandidateIdentifier> added) {
+        this.added = added;
+    }
+
+    public List<CandidateIdentifier> getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(List<CandidateIdentifier> removed) {
+        this.removed = removed;
     }
 
     @Override
@@ -43,22 +52,22 @@ public class CandidateDifference {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CandidateDifference that = (CandidateDifference) o;
-        return Objects.equals(editedCandidates, that.editedCandidates) &&
-                Objects.equals(addedCandidates, that.addedCandidates) &&
-                Objects.equals(removedCandidates, that.removedCandidates);
+        return Objects.equals(edited, that.edited) &&
+                Objects.equals(added, that.added) &&
+                Objects.equals(removed, that.removed);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(editedCandidates, addedCandidates, removedCandidates);
+        return Objects.hash(edited, added, removed);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("CandidateDifference{");
-        sb.append("editedCandidates=").append(editedCandidates);
-        sb.append(", addedCandidates=").append(addedCandidates);
-        sb.append(", removedCandidates=").append(removedCandidates);
+        sb.append("edited=").append(edited);
+        sb.append(", added=").append(added);
+        sb.append(", removed=").append(removed);
         sb.append('}');
         return sb.toString();
     }

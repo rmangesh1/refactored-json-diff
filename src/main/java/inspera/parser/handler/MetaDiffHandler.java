@@ -39,39 +39,35 @@ public class MetaDiffHandler {
         this.builderStrategyMap = builderStrategyMap;
     }
 
-    public List<MetaDiff> getMetaDifferences(Examination beforeExaminationObj, Examination afterExaminationObj) {
+    public List<MetaDiff> getMetaDifferences(Metadata beforeMetadataObj, Metadata afterMetadataObj) {
 
-        if(beforeExaminationObj.getId().equals(afterExaminationObj.getId())) {
-            List<MetaDiff> metaDiffs = new ArrayList<>();
-            MetaDiffBuilder stdMetaDiffBuilder = new StdMetaDiffBuilder();
-            MetaDiffBuilder metaDiffBuilder = null;
-            Object beforeMetaVariableValue = null;
-            Object afterMetaVariableValue = null;
-            Class dataType = null;
+        List<MetaDiff> metaDiffs = new ArrayList<>();
+        MetaDiffBuilder stdMetaDiffBuilder = new StdMetaDiffBuilder();
+        MetaDiffBuilder metaDiffBuilder = null;
+        Object beforeMetaVariableValue = null;
+        Object afterMetaVariableValue = null;
+        Class dataType = null;
 
-            Field[] metaFields = metaClass.getDeclaredFields();
+        Field[] metaFields = metaClass.getDeclaredFields();
 
-            try {
-                for (Field field : metaFields) {
-                    field.setAccessible(true);
-                    beforeMetaVariableValue = field.get(beforeExaminationObj.getMeta());
-                    afterMetaVariableValue = field.get(afterExaminationObj.getMeta());
-                    if (!beforeMetaVariableValue.equals(afterMetaVariableValue)) {
-                        dataType = Class.forName(field.getType().getName());
+        try {
+            for (Field field : metaFields) {
+                field.setAccessible(true);
+                beforeMetaVariableValue = field.get(beforeMetadataObj);
+                afterMetaVariableValue = field.get(afterMetadataObj);
+                if (!beforeMetaVariableValue.equals(afterMetaVariableValue)) {
+                    dataType = Class.forName(field.getType().getName());
 
-                        metaDiffBuilder = builderStrategyMap.getOrDefault(dataType, stdMetaDiffBuilder);
-                        metaDiffs.add(metaDiffBuilder.buildDiff(field, beforeMetaVariableValue, afterMetaVariableValue));
-                    }
+                    metaDiffBuilder = builderStrategyMap.getOrDefault(dataType, stdMetaDiffBuilder);
+                    metaDiffs.add(metaDiffBuilder.buildDiff(field, beforeMetaVariableValue, afterMetaVariableValue));
                 }
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
             }
-
-            return metaDiffs;
-        } else {
-            throw new RuntimeException("Not comparing the same examinations!");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
+
+        return metaDiffs;
     }
 }

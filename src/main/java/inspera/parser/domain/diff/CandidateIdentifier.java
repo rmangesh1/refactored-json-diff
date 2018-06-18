@@ -17,6 +17,10 @@ public class CandidateIdentifier {
         this.id = id;
     }
 
+    public CandidateIdentifier(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
