@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class CandidateDiffHandler {
 
     public CandidateDifference getCandidateDifferences(Examination beforeExaminationObj, Examination afterExaminationObj) {
-        CandidateDifference candidateDifference = new CandidateDifference();
 
         List<Candidate> beforeCandidates = beforeExaminationObj.getCandidates();
         List<Candidate> afterCandidates = afterExaminationObj.getCandidates();
@@ -45,8 +44,8 @@ public class CandidateDiffHandler {
 
         beforeCandidateIds.retainAll(afterCandidateIds);
 
-        Map<Long, Candidate> beforeCandidateMap = beforeCandidates.stream().collect(Collectors.toMap(Candidate::getId, c -> c));
-        Map<Long, Candidate> afterCandidateMap = afterCandidates.stream().collect(Collectors.toMap(Candidate::getId, c -> c));
+        Map<Long, Candidate> beforeCandidateMap = getCandidateMap(beforeCandidates);
+        Map<Long, Candidate> afterCandidateMap = getCandidateMap(afterCandidates);
 
         beforeCandidateIds.forEach(id -> {
             if(!beforeCandidateMap.get(id).equals(afterCandidateMap.get(id)))
@@ -54,6 +53,10 @@ public class CandidateDiffHandler {
         });
 
         return editedCandidateIdentifiers;
+    }
+
+    private Map<Long, Candidate> getCandidateMap(List<Candidate> candidates) {
+        return candidates.stream().collect(Collectors.toMap(Candidate::getId, c -> c));
     }
 
     private <T> List<T> removeSecondListFromFirstAndReturnResultList(List<T> firstList, List<T> secondList) {
