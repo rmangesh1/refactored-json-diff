@@ -14,6 +14,15 @@ public class Metadata {
 
     private LocalDateTime endTime;
 
+    public Metadata() {
+    }
+
+    public Metadata(String title, LocalDateTime startTime, LocalDateTime endTime) {
+        this.title = title;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public String getTitle() {
         return title;
     }

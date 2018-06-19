@@ -16,6 +16,15 @@ public class Candidate {
 
     private Integer extraTime;
 
+    public Candidate() {
+    }
+
+    public Candidate(Long id, String name, Integer extraTime) {
+        this.id = id;
+        this.name = name;
+        this.extraTime = extraTime;
+    }
+
     public Long getId() {
         return id;
     }
