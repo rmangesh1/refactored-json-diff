@@ -1,3 +1,5 @@
+package inspera.parser;
+
 import inspera.parser.ExaminationDiffParser;
 import org.junit.Before;
 

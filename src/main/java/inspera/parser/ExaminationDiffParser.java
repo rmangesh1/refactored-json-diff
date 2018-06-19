@@ -8,6 +8,7 @@ import inspera.parser.domain.Metadata;
 import inspera.parser.domain.diff.CandidateDifference;
 import inspera.parser.domain.diff.ExaminationDifference;
 import inspera.parser.domain.diff.MetaDiff;
+import inspera.parser.exception.NonMatchingEntityException;
 import inspera.parser.handler.CandidateDiffHandler;
 import inspera.parser.handler.CandidateDiffHandlerImpl;
 import inspera.parser.handler.MetaDiffHandler;
@@ -62,7 +63,7 @@ public class ExaminationDiffParser implements DiffParser {
                 e.printStackTrace();
             }
         } else {
-            throw new RuntimeException("Not comparing the same examinations!");
+            throw new NonMatchingEntityException("Not comparing the same examinations!");
         }
 
         return objectMapper.valueToTree(examinationDifference);

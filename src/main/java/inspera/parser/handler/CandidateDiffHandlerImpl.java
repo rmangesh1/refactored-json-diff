@@ -1,10 +1,10 @@
 package inspera.parser.handler;
 
 import inspera.parser.domain.Candidate;
-import inspera.parser.domain.Examination;
 import inspera.parser.domain.diff.CandidateDifference;
 import inspera.parser.domain.diff.CandidateIdentifier;
-import inspera.parser.util.ListUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,8 @@ import static inspera.parser.util.ListUtils.retainAll;
  * Created by rmang on 18-06-2018.
  */
 public class CandidateDiffHandlerImpl implements CandidateDiffHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(CandidateDiffHandler.class);
 
     @Override
     public CandidateDifference getCandidateDifferences(List<Candidate> beforeCandidates, List<Candidate> afterCandidates) {

@@ -5,6 +5,8 @@ import inspera.parser.builder.MetaDiffBuilder;
 import inspera.parser.builder.StandardMetaDiffBuilder;
 import inspera.parser.domain.Metadata;
 import inspera.parser.domain.diff.MetaDiff;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -17,6 +19,8 @@ import java.util.Map;
  * Created by rmang on 17-06-2018.
  */
 public class MetaDiffHandlerImpl implements MetaDiffHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(MetaDiffHandlerImpl.class);
 
     private Class metaClass;
 
@@ -62,10 +66,9 @@ public class MetaDiffHandlerImpl implements MetaDiffHandler {
                     metaDiffs.add(metaDiffBuilder.buildDiff(field, beforeMetaVariableValue, afterMetaVariableValue));
                 }
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | IllegalAccessException e) {
+            logger.error("Error during parsing/fetching Metadata values", e);
+            throw new RuntimeException(e);
         }
 
         return metaDiffs;
