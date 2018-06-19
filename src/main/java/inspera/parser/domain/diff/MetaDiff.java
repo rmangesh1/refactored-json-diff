@@ -17,6 +17,15 @@ public class MetaDiff {
     @JsonProperty("after")
     private Object afterValue;
 
+    public MetaDiff() {
+    }
+
+    public MetaDiff(String field, Object beforeValue, Object afterValue) {
+        this.field = field;
+        this.beforeValue = beforeValue;
+        this.afterValue = afterValue;
+    }
+
     public String getField() {
         return field;
     }

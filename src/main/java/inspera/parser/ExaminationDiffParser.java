@@ -9,9 +9,10 @@ import inspera.parser.domain.diff.CandidateDifference;
 import inspera.parser.domain.diff.ExaminationDifference;
 import inspera.parser.domain.diff.MetaDiff;
 import inspera.parser.handler.CandidateDiffHandler;
+import inspera.parser.handler.CandidateDiffHandlerImpl;
 import inspera.parser.handler.MetaDiffHandler;
+import inspera.parser.handler.MetaDiffHandlerImpl;
 import inspera.parser.mapper.ExamDiffObjectMapper;
-import org.apache.commons.lang3.builder.Diff;
 
 import java.util.List;
 
@@ -28,8 +29,14 @@ public class ExaminationDiffParser implements DiffParser {
 
     public ExaminationDiffParser() {
         objectMapper = ExamDiffObjectMapper.getObjectMapper();
-        metaDiffHandler = new MetaDiffHandler(Metadata.class);
-        candidateDiffHandler = new CandidateDiffHandler();
+        metaDiffHandler = new MetaDiffHandlerImpl(Metadata.class);
+        candidateDiffHandler = new CandidateDiffHandlerImpl();
+    }
+
+    public ExaminationDiffParser(ObjectMapper objectMapper, MetaDiffHandler metaDiffHandler, CandidateDiffHandler candidateDiffHandler) {
+        this.objectMapper = objectMapper;
+        this.metaDiffHandler = metaDiffHandler;
+        this.candidateDiffHandler = candidateDiffHandler;
     }
 
     @Override
@@ -45,7 +52,7 @@ public class ExaminationDiffParser implements DiffParser {
         if(beforeExaminationObj.getId().equals(afterExaminationObj.getId())) {
             List<MetaDiff> metaDiffList = metaDiffHandler.getMetaDifferences(beforeExaminationObj.getMeta(), afterExaminationObj.getMeta());
 
-            CandidateDifference candidateDifference = candidateDiffHandler.getCandidateDifferences(beforeExaminationObj, afterExaminationObj);
+            CandidateDifference candidateDifference = candidateDiffHandler.getCandidateDifferences(beforeExaminationObj.getCandidates(), afterExaminationObj.getCandidates());
 
             examinationDifference = new ExaminationDifference(metaDiffList, candidateDifference);
 
