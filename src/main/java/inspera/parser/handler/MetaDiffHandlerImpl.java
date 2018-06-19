@@ -50,7 +50,6 @@ public class MetaDiffHandlerImpl implements MetaDiffHandler {
         MetaDiffBuilder metaDiffBuilder = null;
         Object beforeMetaVariableValue = null;
         Object afterMetaVariableValue = null;
-        Class dataType = null;
 
         Field[] metaFields = metaClass.getDeclaredFields();
 
@@ -60,13 +59,11 @@ public class MetaDiffHandlerImpl implements MetaDiffHandler {
                 beforeMetaVariableValue = field.get(beforeMetadataObj);
                 afterMetaVariableValue = field.get(afterMetadataObj);
                 if (!beforeMetaVariableValue.equals(afterMetaVariableValue)) {
-                    dataType = Class.forName(field.getType().getName());
-
-                    metaDiffBuilder = builderStrategyMap.getOrDefault(dataType, standardMetaDiffBuilder);
+                    metaDiffBuilder = builderStrategyMap.getOrDefault(field.getType(), standardMetaDiffBuilder);
                     metaDiffs.add(metaDiffBuilder.buildDiff(field, beforeMetaVariableValue, afterMetaVariableValue));
                 }
             }
-        } catch (ClassNotFoundException | IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             logger.error("Error during parsing/fetching Metadata values", e);
             throw new RuntimeException(e);
         }
