@@ -1,6 +1,5 @@
 package inspera.parser;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import inspera.parser.domain.Examination;
@@ -45,23 +44,14 @@ public class ExaminationDiffParser implements DiffParser {
 
         //Convert to POJO
         Examination beforeExaminationObj = objectMapper.convertValue(before, Examination.class);
-
         Examination afterExaminationObj = objectMapper.convertValue(after, Examination.class);
 
         ExaminationDifference examinationDifference = null;
 
         if(beforeExaminationObj.getId().equals(afterExaminationObj.getId())) {
             List<MetaDiff> metaDiffList = metaDiffHandler.getMetaDifferences(beforeExaminationObj.getMeta(), afterExaminationObj.getMeta());
-
             CandidateDifference candidateDifference = candidateDiffHandler.getCandidateDifferences(beforeExaminationObj.getCandidates(), afterExaminationObj.getCandidates());
-
             examinationDifference = new ExaminationDifference(metaDiffList, candidateDifference);
-
-            try {
-                System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(examinationDifference));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
         } else {
             throw new NonMatchingEntityException("Not comparing the same examinations!");
         }
