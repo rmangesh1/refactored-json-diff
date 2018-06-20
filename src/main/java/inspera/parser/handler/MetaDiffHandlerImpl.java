@@ -39,6 +39,12 @@ public class MetaDiffHandlerImpl implements MetaDiffHandler {
         this.builderStrategyMap = builderStrategyMap;
     }
 
+    /**
+     * Returns list of MetaDiff between before and after Metadata
+     * @param beforeMetadataObj
+     * @param afterMetadataObj
+     * @return
+     */
     @Override
     public List<MetaDiff> getMetaDifferences(Metadata beforeMetadataObj, Metadata afterMetadataObj) {
 

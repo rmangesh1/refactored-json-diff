@@ -18,6 +18,12 @@ public class CandidateDiffHandlerImpl implements CandidateDiffHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CandidateDiffHandler.class);
 
+    /**
+     * Returns CandidateDifference between before and after candidates
+     * @param beforeCandidates
+     * @param afterCandidates
+     * @return
+     */
     @Override
     public CandidateDifference getCandidateDifferences(List<Candidate> beforeCandidates, List<Candidate> afterCandidates) {
 
