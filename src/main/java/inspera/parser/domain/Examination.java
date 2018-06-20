@@ -3,9 +3,6 @@ package inspera.parser.domain;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class Examination {
 
     private Long id;

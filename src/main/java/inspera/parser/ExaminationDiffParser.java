@@ -16,9 +16,6 @@ import inspera.parser.mapper.ExamDiffObjectMapper;
 
 import java.util.List;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class ExaminationDiffParser implements DiffParser {
 
     private ObjectMapper objectMapper;

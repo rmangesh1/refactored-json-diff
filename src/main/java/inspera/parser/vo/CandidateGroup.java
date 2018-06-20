@@ -3,11 +3,9 @@ package inspera.parser.vo;
 import inspera.parser.domain.Candidate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Created by rmang on 19-06-2018.
- */
 public class CandidateGroup {
 
     private List<Candidate> beforeCandidates;
@@ -39,6 +37,14 @@ public class CandidateGroup {
 
     public List<Long> getAfterCandidateIds() {
         return afterCandidateIds;
+    }
+
+    public Map<Long, Candidate> getBeforeCandidateMap() {
+        return beforeCandidates.stream().collect(Collectors.toMap(Candidate::getId, c -> c));
+    }
+
+    public Map<Long, Candidate> getAfterCandidateMap() {
+        return afterCandidates.stream().collect(Collectors.toMap(Candidate::getId, c -> c));
     }
 
     private List<Long> getCandidateIds(List<Candidate> candidates) {

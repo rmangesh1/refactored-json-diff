@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Created by rmang on 17-06-2018.
+ * Singleton exam difference object mapper holder
  */
 public class ExamDiffObjectMapper {
 

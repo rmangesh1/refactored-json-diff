@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class Candidate {
 
     private Long id;

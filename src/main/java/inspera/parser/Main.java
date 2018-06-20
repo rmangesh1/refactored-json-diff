@@ -10,9 +10,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class Main {
 
     public static void main(String[] args) throws URISyntaxException, IOException {

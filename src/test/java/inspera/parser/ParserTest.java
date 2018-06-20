@@ -17,16 +17,14 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static java.lang.String.valueOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-/**
- *
- */
 @RunWith(Parameterized.class)
 public class ParserTest {
 
-    private ExaminationDiffParser parser = new ExaminationDiffParser();
+    private DiffParser parser = new ExaminationDiffParser();
 
     private ObjectMapper objectMapper = ExamDiffObjectMapper.getObjectMapper();
 
@@ -62,7 +60,7 @@ public class ParserTest {
         JsonNode actualDiffJsonNode = parser.parse(beforeJsonNode, afterJsonNode);
 
         //Then
-        assertEquals(expectedDiffJsonNode.toString(), actualDiffJsonNode.toString());
+        assertEquals(valueOf(expectedDiffJsonNode), valueOf(actualDiffJsonNode));
     }
 
     @Test(expected = NonMatchingEntityException.class)

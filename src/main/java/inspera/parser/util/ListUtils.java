@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mrana on 19.06.2018.
+ * Utility class to perform list operations
  */
 public class ListUtils {
 

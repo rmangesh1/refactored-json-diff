@@ -7,9 +7,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class DateTimeMetaDiffBuilder implements MetaDiffBuilder<LocalDateTime> {
 
     private ZoneId zoneId;

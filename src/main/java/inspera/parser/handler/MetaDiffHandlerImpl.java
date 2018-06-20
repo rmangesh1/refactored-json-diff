@@ -15,9 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class MetaDiffHandlerImpl implements MetaDiffHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(MetaDiffHandlerImpl.class);

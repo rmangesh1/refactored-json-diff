@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by rmang on 19-06-2018.
- */
 public class StandardMetaDiffBuilderTest {
 
     MetaDiffBuilder metaDiffBuilder = new StandardMetaDiffBuilder();

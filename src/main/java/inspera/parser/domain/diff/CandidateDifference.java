@@ -3,9 +3,6 @@ package inspera.parser.domain.diff;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by rmang on 14-06-2018.
- */
 public class CandidateDifference {
 
     private List<CandidateIdentifier> edited;

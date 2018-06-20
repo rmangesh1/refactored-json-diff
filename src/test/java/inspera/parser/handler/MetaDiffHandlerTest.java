@@ -12,9 +12,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by rmang on 19-06-2018.
- */
 public class MetaDiffHandlerTest {
 
     private MetaDiffHandler metaDiffHandler = new MetaDiffHandlerImpl(Metadata.class);

@@ -3,9 +3,6 @@ package inspera.parser.domain;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-/**
- * Created by rmang on 17-06-2018.
- */
 public class Metadata {
 
     private String title;

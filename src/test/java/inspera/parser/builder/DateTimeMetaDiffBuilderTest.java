@@ -9,9 +9,6 @@ import java.time.ZoneId;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by rmang on 19-06-2018.
- */
 public class DateTimeMetaDiffBuilderTest {
 
     MetaDiffBuilder metaDiffBuilder = new DateTimeMetaDiffBuilder();

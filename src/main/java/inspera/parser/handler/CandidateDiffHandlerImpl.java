@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
 import static inspera.parser.util.ListUtils.removeAll;
 import static inspera.parser.util.ListUtils.retainAll;
 
-/**
- * Created by rmang on 18-06-2018.
- */
 public class CandidateDiffHandlerImpl implements CandidateDiffHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CandidateDiffHandler.class);
@@ -31,24 +28,42 @@ public class CandidateDiffHandlerImpl implements CandidateDiffHandler {
 
         List<CandidateIdentifier> removedCandidateIdentifiers = getRemovedCandidateIdentifiers(beforeCandidateIds, afterCandidateIds);
 
-        List<CandidateIdentifier> editedCandidateIdentifiers = getEditedCandidateIdentifiers(beforeCandidates, afterCandidates);
+        List<CandidateIdentifier> editedCandidateIdentifiers = getEditedCandidateIdentifiers(beforeCandidates, afterCandidates, beforeCandidateIds, afterCandidateIds);
 
         return new CandidateDifference(editedCandidateIdentifiers, addedCandidateIdentifiers, removedCandidateIdentifiers);
     }
 
-    private List<CandidateIdentifier> getAddedCandidateIdentifiers(List<Long> beforeCandidateIds, List<Long> afterCandidateIds) {
+    /**
+     * Returns list of added candidate identifiers
+     * @param beforeCandidateIds
+     * @param afterCandidateIds
+     * @return
+     */
+    protected List<CandidateIdentifier> getAddedCandidateIdentifiers(List<Long> beforeCandidateIds, List<Long> afterCandidateIds) {
         return getCandidateIdentifiers(afterCandidateIds, beforeCandidateIds);
     }
 
-    private List<CandidateIdentifier> getRemovedCandidateIdentifiers(List<Long> beforeCandidateIds, List<Long> afterCandidateIds) {
+    /**
+     * Returns list of removed candidate identifiers
+     * @param beforeCandidateIds
+     * @param afterCandidateIds
+     * @return
+     */
+    protected List<CandidateIdentifier> getRemovedCandidateIdentifiers(List<Long> beforeCandidateIds, List<Long> afterCandidateIds) {
         return getCandidateIdentifiers(beforeCandidateIds, afterCandidateIds);
     }
 
-    private List<CandidateIdentifier> getEditedCandidateIdentifiers(List<Candidate> beforeCandidates, List<Candidate> afterCandidates) {
+    /**
+     * Returns list of edited candidate identifiers
+     * @param beforeCandidates
+     * @param afterCandidates
+     * @param beforeCandidateIds
+     * @param afterCandidateIds
+     * @return
+     */
+    protected List<CandidateIdentifier> getEditedCandidateIdentifiers(List<Candidate> beforeCandidates, List<Candidate> afterCandidates,
+                                                                    List<Long> beforeCandidateIds, List<Long> afterCandidateIds) {
         List<CandidateIdentifier> editedCandidateIdentifiers = new ArrayList<>();
-
-        List<Long> beforeCandidateIds = getCandidateIds(beforeCandidates);
-        List<Long> afterCandidateIds = getCandidateIds(afterCandidates);
 
         List<Long> commonCandidateIds = retainAll(beforeCandidateIds, afterCandidateIds);
 
@@ -63,14 +78,30 @@ public class CandidateDiffHandlerImpl implements CandidateDiffHandler {
         return editedCandidateIdentifiers;
     }
 
+    /**
+     * Returns list of candidate IDs
+     * @param candidates
+     * @return
+     */
     private List<Long> getCandidateIds(List<Candidate> candidates) {
         return candidates.stream().map(Candidate::getId).sorted().collect(Collectors.toList());
     }
 
+    /**
+     * Returns a map of candidate id to candidate
+     * @param candidates
+     * @return
+     */
     private Map<Long, Candidate> getCandidateMap(List<Candidate> candidates) {
         return candidates.stream().collect(Collectors.toMap(Candidate::getId, c -> c));
     }
 
+    /**
+     * Returns a list of added/removed CandidateIdentifiers
+     * @param candidateIds
+     * @param candidateIdsToBeRemoved
+     * @return
+     */
     private List<CandidateIdentifier> getCandidateIdentifiers(List<Long> candidateIds, List<Long> candidateIdsToBeRemoved) {
         List<CandidateIdentifier> candidateIdentifiers = new ArrayList<>();
 

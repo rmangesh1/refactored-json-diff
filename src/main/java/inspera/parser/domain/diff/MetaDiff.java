@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-/**
- * Created by rmang on 14-06-2018.
- */
 public class MetaDiff {
 
     private String field;

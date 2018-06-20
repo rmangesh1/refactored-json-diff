@@ -1,7 +1,8 @@
 package inspera.parser.exception;
 
 /**
- * Created by mrana on 19.06.2018.
+ * Excpetion to denote when two examinations objects in comparison are not the same
+ * i.e. based on id
  */
 public class NonMatchingEntityException extends RuntimeException {
 
