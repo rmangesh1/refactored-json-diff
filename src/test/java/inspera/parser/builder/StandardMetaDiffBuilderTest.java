@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class StandardMetaDiffBuilderTest {
 
-    MetaDiffBuilder metaDiffBuilder = new StandardMetaDiffBuilder();
+    private MetaDiffBuilder metaDiffBuilder = new StandardMetaDiffBuilder();
 
     @Test
     public void testStandardMetaDiffBuilderBuildingCorrectMetaDiff() throws NoSuchFieldException {

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DateTimeMetaDiffBuilderTest {
 
-    MetaDiffBuilder metaDiffBuilder = new DateTimeMetaDiffBuilder();
+    private MetaDiffBuilder metaDiffBuilder = new DateTimeMetaDiffBuilder();
 
     @Test
     public void testDateTimeMetaDiffBuilderBuildingCorrectMetaDiff() throws NoSuchFieldException {

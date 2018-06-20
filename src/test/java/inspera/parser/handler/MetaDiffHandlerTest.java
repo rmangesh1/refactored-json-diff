@@ -16,7 +16,7 @@ public class MetaDiffHandlerTest {
 
     private MetaDiffHandler metaDiffHandler = new MetaDiffHandlerImpl(Metadata.class);
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     @Test
     public void testMetaDiffHandlerToReturnCorrectMetaDiffs() {
