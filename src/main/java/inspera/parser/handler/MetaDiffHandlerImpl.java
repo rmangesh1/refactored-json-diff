@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Handle class responsible to get Metadata differences
+ */
 public class MetaDiffHandlerImpl implements MetaDiffHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(MetaDiffHandlerImpl.class);

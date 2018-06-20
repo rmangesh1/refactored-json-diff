@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+/**
+ * Handler class responsible to get Candidate differences
+ */
 public class CandidateDiffHandlerImpl implements CandidateDiffHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CandidateDiffHandler.class);
